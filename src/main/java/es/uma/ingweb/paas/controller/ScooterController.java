@@ -27,6 +27,7 @@ public class ScooterController {
                   Scooter scooter = Scooter.builder()
                         .latitude(36.7175003)
                         .longitude(-4.4207582)
+                        .available(true)
                         .build();
                   scooterRepository.insert(scooter);
               });

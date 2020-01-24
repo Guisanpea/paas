@@ -4,16 +4,21 @@ import es.uma.ingweb.paas.entities.Scooter;
 import es.uma.ingweb.paas.entities.User;
 import es.uma.ingweb.paas.repositories.ScooterRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.IntStream;
 
+@RestController
 @RequestMapping("/scooters")
 @AllArgsConstructor
 public class ScooterController {
     private final ScooterRepository scooterRepository;
+
+    @GetMapping
+    public List<Scooter> getAll() {
+        return scooterRepository.findAll();
+    }
 
     @PostMapping("/init")
     public void init() {

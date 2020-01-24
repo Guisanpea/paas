@@ -21,7 +21,7 @@ public class ScooterController {
     }
 
     @PostMapping("/init")
-    public void init() {
+    public List<Scooter> init() {
         IntStream.range(0, 5)
               .forEach(i -> {
                   Scooter scooter = Scooter.builder()
@@ -31,5 +31,11 @@ public class ScooterController {
                         .build();
                   scooterRepository.insert(scooter);
               });
+        return scooterRepository.findAll();
+    }
+
+    @PostMapping("/delete/all")
+    public void deleteAll() {
+        scooterRepository.deleteAll();
     }
 }

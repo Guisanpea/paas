@@ -23,10 +23,12 @@ public class MessageController {
     public List<Message> get(
           @RequestParam Optional<String> senderEmail,
           @RequestParam Optional<String> receiverEmail) {
-        return messageRepository.findAllBySenderEmailAndReceiverEmail(
-              senderEmail.orElse(""),
-              receiverEmail.orElse("")
-        );
+        return senderEmail.flatMap(sender -> receiverEmail.map(receiver ->
+              messageRepository.findAllBySenderEmailAndReceiverEmail(
+                    sender,
+                    receiver
+              )
+        )).orElseGet(messageRepository::findAll);
     }
 
     @PostMapping
